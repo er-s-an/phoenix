@@ -24,7 +24,7 @@ import {
 import {
   type Annotation,
   type AnnotationConfig,
-  getPositiveOptimizationFromConfig,
+  getOptimizationValueFromConfig,
 } from "@phoenix/components/annotation";
 import { AnnotationDetailsContent } from "@phoenix/components/annotation/AnnotationDetailsContent";
 import { Skeleton } from "@phoenix/components/core/loading";
@@ -271,7 +271,7 @@ export function ExperimentRunCellAnnotationsList(
           annotationSummaryByAnnotationName[annotation.name]?.meanScore;
         const annotationConfig: AnnotationConfig | undefined =
           annotationConfigsByName[annotation.name];
-        const positiveOptimization = getPositiveOptimizationFromConfig({
+        const optimizationValue = getOptimizationValueFromConfig({
           config: annotationConfig,
           score: annotation.score,
         });
@@ -281,7 +281,7 @@ export function ExperimentRunCellAnnotationsList(
             <TooltipTrigger delay={0}>
               <ExperimentAnnotationButton
                 annotation={annotation}
-                positiveOptimization={positiveOptimization ?? undefined}
+                optimizationValue={optimizationValue}
                 extra={
                   meanAnnotationScore != null && numRepetitions > 1 ? (
                     <Flex direction="row" gap="size-100" alignItems="center">
