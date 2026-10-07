@@ -95,6 +95,15 @@ EXECUTE_ROUTING_NOTE = (
     "`executeSql` only for answers computed over many of them at once."
 )
 
+
+def without_data_access(instructions: str | None) -> str | None:
+    """The server instructions minus the data-access block, for a client such as PXI
+    whose own prompt states the rule and whose lookup surface is GraphQL, not REST."""
+    if not instructions:
+        return instructions
+    return instructions.replace(DATA_ACCESS_INSTRUCTIONS, "").strip() or None
+
+
 __all__ = [
     "DATA_ACCESS_INSTRUCTIONS",
     "DESCRIBE_SQL_SCHEMA_DESCRIPTION",
@@ -103,4 +112,5 @@ __all__ = [
     "REST_LOOKUP_TOOLS",
     "REST_WHEN",
     "SQL_WHEN",
+    "without_data_access",
 ]
